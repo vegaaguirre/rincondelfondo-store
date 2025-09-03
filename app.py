@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, abort
 import re
 
 app = Flask(__name__)
@@ -56,17 +56,34 @@ def subscribe():
     email = request.form.get('email')
     if not email:
         return jsonify({'status': 'error', 'message': 'El correo electrónico es obligatorio.'}), 400
-
     # Simple regex for email validation
     if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
         return jsonify({'status': 'error', 'message': 'Por favor, introduce un correo electrónico válido.'}), 400
-
     try:
         with open('subscribers.txt', 'a') as f:
             f.write(email + '\n')
         return jsonify({'status': 'success', 'message': '¡Gracias por suscribirte!'})
     except IOError:
         return jsonify({'status': 'error', 'message': 'No se pudo guardar el correo. Inténtalo de nuevo más tarde.'}), 500
+
+# Nueva ruta segura para ver el archivo de logs
+@app.route('/ver-logs')
+def ver_logs():
+    # Contraseña que tú definas
+    contraseña_correcta = "tu_contraseña_secreta"
+
+    # Obtener la contraseña desde la URL (ej: /ver-logs?pass=1234)
+    contraseña = request.args.get('pass')
+
+    if contraseña != contraseña_correcta:
+        abort(403)  # Prohibido si la contraseña no coincide
+
+    try:
+        with open('subscribers.txt', 'r') as f:
+            contenido = f.read()
+        return f"<pre>{contenido}</pre>"
+    except FileNotFoundError:
+        return "El archivo de logs no existe."
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
