@@ -422,12 +422,13 @@
                 <p class="mb-8 max-w-2xl mx-auto text-white text-opacity-90">
                     Suscríbete para recibir novedades, promociones especiales y tutoriales exclusivos sobre el cuidado de tus flores de fomi.
                 </p>
-                <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-                    <input type="email" placeholder="Tu correo electrónico" class="flex-grow px-4 py-3 rounded-full focus:outline-none text-dark">
+                <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+                    <input type="email" name="email" placeholder="Tu correo electrónico" class="flex-grow px-4 py-3 rounded-full focus:outline-none text-dark" required>
                     <button type="submit" class="bg-accent hover:bg-opacity-90 text-dark font-medium px-6 py-3 rounded-full transition whitespace-nowrap">
                         Suscribirme
                     </button>
                 </form>
+                <div id="newsletter-message" class="mt-4 text-white"></div>
             </div>
         </div>
     </section>
@@ -576,6 +577,37 @@
                     console.error('Error fetching products:', error);
                     productListContainer.innerHTML = '<p>Error al cargar los productos. Por favor, intente de nuevo más tarde.</p>';
                 });
+        });
+
+        // Newsletter form submission
+        document.getElementById('newsletter-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const messageContainer = document.getElementById('newsletter-message');
+
+            messageContainer.textContent = 'Enviando...';
+
+            fetch('/subscribe', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                messageContainer.textContent = data.message;
+                if (data.status === 'success') {
+                    form.reset();
+                    messageContainer.style.color = '#A5FFD6'; // accent color
+                } else {
+                    messageContainer.style.color = '#FF85A2'; // primary color for errors
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                messageContainer.textContent = 'Ocurrió un error. Por favor, intente de nuevo.';
+                messageContainer.style.color = '#FF85A2';
+            });
         });
     </script>
 </body>

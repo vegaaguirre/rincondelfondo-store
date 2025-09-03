@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
+import re
 
 app = Flask(__name__)
 
@@ -48,6 +49,24 @@ def index():
 def get_products():
     """Provide product data as a JSON API."""
     return jsonify(PRODUCTS)
+
+@app.route('/subscribe', methods=['POST'])
+def subscribe():
+    """Handle newsletter subscription requests."""
+    email = request.form.get('email')
+    if not email:
+        return jsonify({'status': 'error', 'message': 'El correo electrónico es obligatorio.'}), 400
+
+    # Simple regex for email validation
+    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+        return jsonify({'status': 'error', 'message': 'Por favor, introduce un correo electrónico válido.'}), 400
+
+    try:
+        with open('subscribers.txt', 'a') as f:
+            f.write(email + '\n')
+        return jsonify({'status': 'success', 'message': '¡Gracias por suscribirte!'})
+    except IOError:
+        return jsonify({'status': 'error', 'message': 'No se pudo guardar el correo. Inténtalo de nuevo más tarde.'}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)
