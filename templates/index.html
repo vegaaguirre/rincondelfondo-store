@@ -6,6 +6,7 @@
     <title>el rincon del fondo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -84,16 +85,16 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="inicio" class="hero-pattern py-16 md:py-24">
+    <section id="inicio" class="hero-pattern py-16 md:py-24 overflow-x-hidden">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0">
+            <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                     Flores de <span class="text-primary">Fomi</span> Hechas con <span class="font-cursive text-accent">Amor</span>
                 </h1>
                 <p class="text-lg mb-8 text-gray-600">
                     Descubre nuestra colección única de flores artesanales en fomi, perfectas para regalos especiales, decoración de eventos o para alegrar cualquier espacio.
                 </p>
-                <div class="flex space-x-4">
+                <div class="flex space-x-4" data-aos="fade-up" data-aos-delay="200">
                     <a href="#productos" class="bg-primary hover:bg-opacity-90 text-white px-6 py-3 rounded-full font-medium transition">
                         Ver Colección
                     </a>
@@ -102,7 +103,7 @@
                     </a>
                 </div>
             </div>
-            <div class="md:w-1/2 flex justify-center">
+            <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
                 <div class="relative">
                     <div class="w-64 h-64 md:w-80 md:h-80 bg-primary rounded-full opacity-20 absolute -top-6 -left-6"></div>
                     <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
@@ -125,7 +126,7 @@
     <!-- Featured Products -->
     <section id="productos" class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
+            <div class="text-center mb-12" data-aos="fade-up">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Nuestras <span class="text-primary">Creaciones</span></h2>
                 <p class="max-w-2xl mx-auto text-gray-600">
                     Cada flor es elaborada manualmente con atención al detalle y materiales de alta calidad.
@@ -136,7 +137,7 @@
                 <!-- Products will be dynamically inserted here -->
             </div>
             
-            <div class="text-center mt-12">
+            <div class="text-center mt-12" data-aos="fade-up">
                 <a href="#" class="inline-block border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-full font-medium transition">
                     Ver Todos los Productos
                 </a>
@@ -145,15 +146,15 @@
     </section>
 
     <!-- About Us -->
-    <section id="nosotros" class="py-16 bg-light">
+    <section id="nosotros" class="py-16 bg-light overflow-x-hidden">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10" data-aos="fade-right">
                     <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" 
                          alt="Artesana trabajando flores de fomi" 
                          class="rounded-lg shadow-xl w-full">
                 </div>
-                <div class="md:w-1/2">
+                <div class="md:w-1/2" data-aos="fade-left">
                     <h2 class="text-3xl md:text-4xl font-bold mb-6">Nuestra <span class="text-primary">Historia</span></h2>
                     <p class="text-gray-600 mb-6">
                         TuFloreríaCreativa nació del amor por el arte manual y la naturaleza. Cada flor que creamos está impregnada de dedicación y creatividad, convirtiendo simples materiales en piezas únicas que perduran en el tiempo.
@@ -198,7 +199,7 @@
     <!-- Testimonials -->
     <section id="testimonios" class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
+            <div class="text-center mb-12" data-aos="fade-up">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Lo que dicen nuestros <span class="text-primary">clientes</span></h2>
                 <p class="max-w-2xl mx-auto text-gray-600">
                     La satisfacción de nuestros clientes es nuestra mayor recompensa
@@ -207,7 +208,7 @@
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Testimonial 1 -->
-                <div class="bg-light p-6 rounded-lg shadow-sm">
+                <div class="bg-light p-6 rounded-lg shadow-sm" data-aos="fade-up" data-aos-delay="100">
                     <div class="flex items-center mb-4">
                         <div class="text-primary text-2xl mr-2">
                             <i class="fas fa-quote-left"></i>
@@ -235,7 +236,7 @@
                 </div>
                 
                 <!-- Testimonial 2 -->
-                <div class="bg-light p-6 rounded-lg shadow-sm">
+                <div class="bg-light p-6 rounded-lg shadow-sm" data-aos="fade-up" data-aos-delay="200">
                     <div class="flex items-center mb-4">
                         <div class="text-primary text-2xl mr-2">
                             <i class="fas fa-quote-left"></i>
@@ -263,7 +264,7 @@
                 </div>
                 
                 <!-- Testimonial 3 -->
-                <div class="bg-light p-6 rounded-lg shadow-sm">
+                <div class="bg-light p-6 rounded-lg shadow-sm" data-aos="fade-up" data-aos-delay="300">
                     <div class="flex items-center mb-4">
                         <div class="text-primary text-2xl mr-2">
                             <i class="fas fa-quote-left"></i>
@@ -295,7 +296,7 @@
 
     <!-- Custom Orders -->
     <section class="py-16 bg-primary text-white">
-        <div class="container mx-auto px-4 text-center">
+        <div class="container mx-auto px-4 text-center" data-aos="zoom-in">
             <h2 class="text-3xl md:text-4xl font-bold mb-6">¿Quieres algo <span class="text-accent">personalizado</span>?</h2>
             <p class="max-w-2xl mx-auto mb-8 text-white text-opacity-90">
                 Crea el diseño perfecto para esa ocasión especial. Nos adaptamos a tus necesidades y preferencias.
@@ -310,14 +311,14 @@
     <section id="contacto" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-12">
+                <div class="text-center mb-12" data-aos="fade-up">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4">Contácta<span class="text-primary">nos</span></h2>
                     <p class="max-w-2xl mx-auto text-gray-600">
                         ¿Tienes preguntas o quieres un diseño especial? Escríbenos y te responderemos lo antes posible.
                     </p>
                 </div>
                 
-                <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <form class="grid grid-cols-1 md:grid-cols-2 gap-6" data-aos="fade-up" data-aos-delay="200">
                     <div>
                         <label for="name" class="block text-gray-700 font-medium mb-2">Nombre completo</label>
                         <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
@@ -358,7 +359,7 @@
     <section class="py-16 bg-light">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto">
-                <div class="text-center mb-12">
+                <div class="text-center mb-12" data-aos="fade-up">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4">Preguntas <span class="text-primary">Frecuentes</span></h2>
                     <p class="max-w-2xl mx-auto text-gray-600">
                         Aquí respondemos a las dudas más comunes sobre nuestros productos
@@ -367,7 +368,7 @@
                 
                 <div class="space-y-4">
                     <!-- FAQ 1 -->
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="bg-white p-6 rounded-lg shadow-sm" data-aos="fade-up">
                         <button class="flex justify-between items-center w-full text-left" onclick="toggleFAQ(1)">
                             <h3 class="font-bold">¿Cuánto duran las flores de fomi?</h3>
                             <i class="fas fa-chevron-down text-primary transition-transform duration-300" id="faq-icon-1"></i>
@@ -378,7 +379,7 @@
                     </div>
                     
                     <!-- FAQ 2 -->
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="bg-white p-6 rounded-lg shadow-sm" data-aos="fade-up">
                         <button class="flex justify-between items-center w-full text-left" onclick="toggleFAQ(2)">
                             <h3 class="font-bold">¿Hacen envíos a todo el país?</h3>
                             <i class="fas fa-chevron-down text-primary transition-transform duration-300" id="faq-icon-2"></i>
@@ -389,7 +390,7 @@
                     </div>
                     
                     <!-- FAQ 3 -->
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="bg-white p-6 rounded-lg shadow-sm" data-aos="fade-up">
                         <button class="flex justify-between items-center w-full text-left" onclick="toggleFAQ(3)">
                             <h3 class="font-bold">¿Puedo personalizar los colores de las flores?</h3>
                             <i class="fas fa-chevron-down text-primary transition-transform duration-300" id="faq-icon-3"></i>
@@ -400,7 +401,7 @@
                     </div>
                     
                     <!-- FAQ 4 -->
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="bg-white p-6 rounded-lg shadow-sm" data-aos="fade-up">
                         <button class="flex justify-between items-center w-full text-left" onclick="toggleFAQ(4)">
                             <h3 class="font-bold">¿Cuánto tiempo toma hacer un pedido personalizado?</h3>
                             <i class="fas fa-chevron-down text-primary transition-transform duration-300" id="faq-icon-4"></i>
@@ -416,7 +417,7 @@
 
     <!-- Newsletter -->
     <section class="py-16 bg-primary text-white">
-        <div class="container mx-auto px-4">
+        <div class="container mx-auto px-4" data-aos="zoom-in">
             <div class="max-w-3xl mx-auto text-center">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">Únete a nuestro <span class="text-accent">boletín</span></h2>
                 <p class="mb-8 max-w-2xl mx-auto text-white text-opacity-90">
@@ -523,31 +524,22 @@
             icon.classList.toggle('rotate-180');
         }
         
-        // Simple cart functionality
-        document.querySelectorAll('[class*="product-card"] button').forEach(button => {
-            button.addEventListener('click', function() {
-                const productName = this.closest('.product-card').querySelector('h3').textContent;
-                const productPrice = this.closest('.product-card').querySelector('span').textContent;
-                
-                alert(`¡${productName} (${productPrice}) añadido al carrito!`);
-            });
-        });
-        
         // Mobile menu toggle (placeholder)
         document.querySelector('.md\\:hidden').addEventListener('click', function() {
-            alert('Menú móvil abierto - Esta funcionalidad se implementaría completamente en un sitio real');
+            // In a real app, you would toggle a mobile navigation menu here.
         });
 
-        // Fetch and render products
+        // Fetch and render products, then add cart functionality
         document.addEventListener('DOMContentLoaded', function() {
             const productListContainer = document.getElementById('product-list');
 
             fetch('/api/products')
                 .then(response => response.json())
                 .then(products => {
-                    products.forEach(product => {
-                        const productCard = `
-                            <div class="product-card bg-light rounded-lg overflow-hidden shadow-md transition duration-300">
+                    let productsHTML = '';
+                    products.forEach((product, index) => {
+                        productsHTML += `
+                            <div class="product-card bg-light rounded-lg overflow-hidden shadow-md transition duration-300" data-aos="fade-up" data-aos-delay="${index * 100}">
                                 <div class="relative overflow-hidden h-64">
                                     <img src="${product.image_url}"
                                          alt="${product.name}"
@@ -563,14 +555,24 @@
                                     <p class="text-gray-600 text-sm mb-3">${product.description}</p>
                                     <div class="flex justify-between items-center">
                                         <span class="font-bold text-primary">$${product.price}</span>
-                                        <button class="bg-primary hover:bg-opacity-90 text-white px-3 py-1 rounded-full text-sm transition">
+                                        <button class="add-to-cart-btn bg-primary hover:bg-opacity-90 text-white px-3 py-1 rounded-full text-sm transition">
                                             Añadir al carrito
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         `;
-                        productListContainer.innerHTML += productCard;
+                    });
+                    productListContainer.innerHTML = productsHTML;
+
+                    // Simple cart functionality - must run AFTER products are rendered
+                    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const card = this.closest('.product-card');
+                            const productName = card.querySelector('h3').textContent;
+                            const productPrice = card.querySelector('span').textContent;
+                            alert(`¡${productName} (${productPrice}) añadido al carrito!`);
+                        });
                     });
                 })
                 .catch(error => {
@@ -609,6 +611,15 @@
                 messageContainer.style.color = '#FF85A2';
             });
         });
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        offset: 100
+      });
     </script>
 </body>
 </html>
