@@ -74,7 +74,7 @@ function ProductCard({ product }: ProductCardProps) {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <span className="text-2xl font-bold text-pink-600">${product.price}</span>
-            <span className="text-gray-500 text-sm">USD</span>
+            <span className="text-gray-500 text-sm">MXN</span>
           </div>
           
           <button

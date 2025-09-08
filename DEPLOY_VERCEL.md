@@ -63,6 +63,7 @@ git push -u origin main
    VITE_SUPABASE_URL=tu_supabase_url
    VITE_SUPABASE_ANON_KEY=tu_supabase_anon_key
    VITE_STRIPE_PUBLISHABLE_KEY=tu_stripe_publishable_key
+   VITE_GA_MEASUREMENT_ID=tu_id_de_medicion_de_ga
    ```
 
 5. **Haz clic en:** "Deploy"
