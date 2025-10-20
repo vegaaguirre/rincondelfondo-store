@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Star, Plus, ShoppingCart, Tag } from 'lucide-react'
 import { useProducts } from '@/hooks/useProducts'
-import { useCart } from '@/contexts/CartContext'
+import { useCart } from '@/hooks/useCart'
 import { Product } from '@/lib/types'
 import toast from 'react-hot-toast'
 

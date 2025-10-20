@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useCart } from '@/contexts/CartContext'
+import { useCart } from '@/hooks/useCart'
 import { ShoppingCart, Menu, X, Flower2 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 
