@@ -4,14 +4,14 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import ProductsSection from './components/ProductsSection'
 import AboutSection from './components/AboutSection'
-import TestimonialsSection from './components/TestimonialsSection'
-import CustomSection from './components/CustomSection'
-import FAQSection from './components/FAQSection'
-import NewsletterSection from './components/NewsletterSection'
-import Footer from './components/Footer'
-import CartSidebar from './components/CartSidebar'
 import { Toaster } from 'react-hot-toast'
 import { initGA, trackPageView } from './lib/analytics'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import LoginPage from './pages/admin/LoginPage'
+import DashboardPage from './pages/admin/DashboardPage'
+import AddProductPage from './pages/admin/AddProductPage'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   // Inicializa Google Analytics cuando la aplicación se carga
@@ -22,9 +22,6 @@ function App() {
       trackPageView(window.location.pathname + window.location.search)
     }
   }, [])
-
-  // NOTA: Si en el futuro añades un router (como react-router-dom),
-  // necesitarás un efecto adicional para rastrear las vistas de página en cada cambio de ruta.
 
   return (
     <CartProvider>
@@ -37,18 +34,28 @@ function App() {
           error: { style: { background: '#ef4444' } },
         }}
       />
-      <Header />
-      <main>
-        <Hero />
-        <ProductsSection />
-        <AboutSection />
-        <TestimonialsSection />
-        <CustomSection />
-        <FAQSection />
-        <NewsletterSection />
-      </main>
-      <Footer />
-      <CartSidebar />
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/admin/login" element={<LoginPage />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/add-product"
+            element={
+              <ProtectedRoute>
+                <AddProductPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
     </CartProvider>
   )
 }

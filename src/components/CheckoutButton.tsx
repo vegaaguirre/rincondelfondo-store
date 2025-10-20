@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useCart } from '@/contexts/CartContext'
+import { useCart } from '@/hooks/useCart'
 import { supabase } from '@/lib/supabase'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js'

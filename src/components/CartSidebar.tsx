@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { X, Plus, Minus, ShoppingBag } from 'lucide-react'
-import { useCart } from '@/contexts/CartContext'
+import { useCart } from '@/hooks/useCart'
 import { motion } from 'framer-motion'
 import CheckoutButton from './CheckoutButton'
 

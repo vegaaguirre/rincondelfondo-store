@@ -1,11 +1,7 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import { CartItem } from '@/lib/types'
 import toast from 'react-hot-toast'
-
-interface CartState {
-  items: CartItem[]
-  isOpen: boolean
-}
+import { CartContext, CartState } from './CartContextValue'
 
 type CartAction =
   | { type: 'ADD_ITEM'; payload: CartItem }
@@ -81,20 +77,6 @@ function cartReducer(state: CartState, action: CartAction): CartState {
   }
 }
 
-interface CartContextType {
-  state: CartState
-  addItem: (item: CartItem) => void
-  removeItem: (productId: string) => void
-  updateQuantity: (productId: string, quantity: number) => void
-  clearCart: () => void
-  toggleCart: () => void
-  setCartOpen: (open: boolean) => void
-  getTotalItems: () => number
-  getTotalPrice: () => number
-}
-
-const CartContext = createContext<CartContextType | undefined>(undefined)
-
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, initialState)
 
@@ -168,12 +150,4 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       {children}
     </CartContext.Provider>
   )
-}
-
-export function useCart() {
-  const context = useContext(CartContext)
-  if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider')
-  }
-  return context
 }
