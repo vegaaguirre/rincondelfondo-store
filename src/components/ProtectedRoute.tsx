@@ -18,7 +18,7 @@ export default function ProtectedRoute({ children }) {
       setLoading(false)
     }
     checkUser()
-  }, [navigate])
+  }, [])
 
   if (loading) {
     return <div>Cargando...</div>
