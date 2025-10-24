@@ -15,6 +15,7 @@ export const signOut = async () => {
 }
 
 export const getUser = async () => {
+    console.log('Fetching user...')
     const {
       data: { user },
     } = await supabase.auth.getUser()

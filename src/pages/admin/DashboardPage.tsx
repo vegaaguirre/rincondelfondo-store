@@ -71,6 +71,9 @@ export default function DashboardPage() {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Stock
               </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Acciones
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -105,6 +108,14 @@ export default function DashboardPage() {
                   >
                     {product.stock_quantity}
                   </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <Link
+                    to={`/admin/edit-product/${product.id}`}
+                    className="text-pink-600 hover:text-pink-900 mr-4"
+                  >
+                    Editar
+                  </Link>
                 </td>
               </tr>
             ))}

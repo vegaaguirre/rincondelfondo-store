@@ -11,6 +11,7 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/admin/LoginPage'
 import DashboardPage from './pages/admin/DashboardPage'
 import AddProductPage from './pages/admin/AddProductPage'
+import EditProductPage from './pages/admin/EditProductPage'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
@@ -51,6 +52,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <AddProductPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/edit-product/:id"
+            element={
+              <ProtectedRoute>
+                <EditProductPage />
               </ProtectedRoute>
             }
           />

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
 import { Product } from '@/lib/types'
 
@@ -7,11 +7,8 @@ export function useProducts() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    fetchProducts()
-  }, [])
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
+    console.log('Fetching products...')
     try {
       setLoading(true)
       const { data, error } = await supabase
@@ -26,7 +23,11 @@ export function useProducts() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [])
+
+  useEffect(() => {
+    fetchProducts()
+  }, [fetchProducts])
 
   const getProductById = async (id: string): Promise<Product | null> => {
     try {
