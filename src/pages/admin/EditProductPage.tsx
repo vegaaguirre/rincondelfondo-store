@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { updateProduct } from '@/lib/products'
+import { uploadProductImage } from '@/lib/storage'
 import { supabase } from '@/lib/supabase'
-import { Product } from '@/lib/types'
 import toast from 'react-hot-toast'
 
 export default function EditProductPage() {
@@ -11,6 +11,8 @@ export default function EditProductPage() {
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState(0)
   const [imageUrl, setImageUrl] = useState('')
+  const [imageFile, setImageFile] = useState<File | null>(null)
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [category, setCategory] = useState('')
   const [stockQuantity, setStockQuantity] = useState(0)
   const [isFeatured, setIsFeatured] = useState(false)
@@ -47,6 +49,7 @@ export default function EditProductPage() {
         setDescription(product.description)
         setPrice(product.price)
         setImageUrl(product.image_url)
+        setImagePreview(product.image_url)
         setCategory(product.category)
         setStockQuantity(product.stock_quantity)
         setIsFeatured(product.is_featured)
@@ -63,6 +66,14 @@ export default function EditProductPage() {
     loadProduct()
   }, [id, navigate])
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0]
+      setImageFile(file)
+      setImagePreview(URL.createObjectURL(file))
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -70,20 +81,31 @@ export default function EditProductPage() {
 
     setLoading(true)
     try {
+      let finalImageUrl = imageUrl
+      if (imageFile) {
+        toast.loading('Subiendo imagen...')
+        finalImageUrl = await uploadProductImage(imageFile)
+        toast.dismiss()
+      }
+
+      toast.loading('Actualizando producto...')
       await updateProduct(id, {
         name,
         description,
         price,
-        image_url: imageUrl,
+        image_url: finalImageUrl,
         category,
         stock_quantity: stockQuantity,
         is_featured: isFeatured,
         is_new: isNew,
         is_bestseller: isBestseller,
       })
+      toast.dismiss()
+
       toast.success('¡Producto actualizado!')
       navigate('/admin/dashboard')
     } catch (error: any) {
+      toast.dismiss()
       toast.error(error.message)
     } finally {
       setLoading(false)
@@ -167,19 +189,18 @@ export default function EditProductPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">
-                URL de la Imagen
+                Imagen del Producto
               </label>
               <input
-                type="text"
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-                className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-pink-500 focus:border-pink-500"
-                required
+                type="file"
+                onChange={handleImageChange}
+                className="w-full mt-1"
+                accept="image/*"
               />
-              {imageUrl && (
+              {imagePreview && (
                 <div className="mt-2">
                   <img
-                    src={imageUrl}
+                    src={imagePreview}
                     alt="Preview"
                     className="h-32 w-32 object-cover rounded-md"
                     onError={(e) => {
