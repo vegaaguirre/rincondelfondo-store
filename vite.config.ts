@@ -2,6 +2,7 @@ import path from "path"
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
 import sourceIdentifierPlugin from 'vite-plugin-source-identifier'
+import sitemap from 'vite-plugin-sitemap'
 
 const isProd = process.env.BUILD_MODE === 'prod'
 export default defineConfig({
@@ -11,7 +12,10 @@ export default defineConfig({
       enabled: !isProd,
       attributePrefix: 'data-matrix',
       includeProps: true,
-    })
+    }),
+    sitemap({
+      hostname: 'https://rincondelfondo.store/',
+    }),
   ],
   resolve: {
     alias: {
@@ -19,4 +23,3 @@ export default defineConfig({
     },
   },
 })
-

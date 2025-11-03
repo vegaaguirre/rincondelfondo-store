@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { addProduct } from '@/lib/products'
+import { uploadProductImage } from '@/lib/storage'
 import toast from 'react-hot-toast'
 
 export default function AddProductPage() {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState(0)
-  const [imageUrl, setImageUrl] = useState('')
+  const [imageFile, setImageFile] = useState<File | null>(null)
+  const [imagePreview, setImagePreview] = useState<string | null>(null)
   const [category, setCategory] = useState('')
   const [stockQuantity, setStockQuantity] = useState(0)
   const [isFeatured, setIsFeatured] = useState(false)
@@ -16,10 +18,28 @@ export default function AddProductPage() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0]
+      setImageFile(file)
+      setImagePreview(URL.createObjectURL(file))
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!imageFile) {
+      toast.error('Por favor, selecciona una imagen.')
+      return
+    }
+
     setLoading(true)
     try {
+      toast.loading('Subiendo imagen...')
+      const imageUrl = await uploadProductImage(imageFile)
+      toast.dismiss()
+
+      toast.loading('Añadiendo producto...')
       await addProduct({
         name,
         description,
@@ -31,9 +51,12 @@ export default function AddProductPage() {
         is_new: isNew,
         is_bestseller: isBestseller,
       })
+      toast.dismiss()
+
       toast.success('¡Producto añadido!')
       navigate('/admin/dashboard')
     } catch (error: any) {
+      toast.dismiss()
       toast.error(error.message)
     } finally {
       setLoading(false)
@@ -100,15 +123,22 @@ export default function AddProductPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              URL de la Imagen
+              Imagen del Producto
             </label>
             <input
-              type="text"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              className="w-full mt-1 border border-gray-300 rounded-md shadow-sm"
+              type="file"
+              onChange={handleImageChange}
+              className="w-full mt-1"
+              accept="image/*"
               required
             />
+            {imagePreview && (
+              <img
+                src={imagePreview}
+                alt="Vista previa"
+                className="mt-4 w-32 h-32 object-cover"
+              />
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
