@@ -57,9 +57,9 @@ export default function FAQSection() {
           <div className="flex items-center justify-center mb-4">
             <HelpCircle className="h-8 w-8 text-pink-600 mr-3" />
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Preguntas{' '}
+              Preguntas Frecuentes sobre Nuestras{' '}
               <span className="bg-gradient-to-r from-pink-600 to-rose-500 bg-clip-text text-transparent">
-                Frecuentes
+                Flores Artesanales
               </span>
             </h2>
           </div>

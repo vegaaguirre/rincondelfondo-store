@@ -44,11 +44,11 @@ export default function Hero() {
             </span>
           </h1>
           
-          <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+          <h2 className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
             Flores artesanales de <strong>fomi de alta calidad</strong> que nunca se marchitan. 
             Cada pieza es única, hecha a mano con amor y dedicación para llevar belleza 
             eterna a tus espacios más especiales.
-          </p>
+          </h2>
         </motion.div>
 
         <motion.div

@@ -103,7 +103,7 @@ export default function ProductsSection() {
       <section id="products" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Nuestras Creaciones</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Nuestras Flores Artesanales</h2>
             <div className="animate-pulse">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {[...Array(4)].map((_, i) => (
@@ -138,7 +138,7 @@ export default function ProductsSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Nuestras <span className="bg-gradient-to-r from-pink-600 to-rose-500 bg-clip-text text-transparent">Creaciones</span>
+            Nuestras <span className="bg-gradient-to-r from-pink-600 to-rose-500 bg-clip-text text-transparent">Flores Artesanales</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Cada flor es una obra de arte única, elaborada con materiales de primera calidad 
