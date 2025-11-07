@@ -10,9 +10,12 @@ export default function EditProductPage() {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState(0)
-  const [imageUrl, setImageUrl] = useState('')
-  const [imageFile, setImageFile] = useState<File | null>(null)
-  const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [imageUrls, setImageUrls] = useState<string[]>(['', ''])
+  const [imageFiles, setImageFiles] = useState<(File | null)[]>([null, null])
+  const [imagePreviews, setImagePreviews] = useState<(string | null)[]>([
+    null,
+    null,
+  ])
   const [category, setCategory] = useState('')
   const [stockQuantity, setStockQuantity] = useState(0)
   const [isFeatured, setIsFeatured] = useState(false)
@@ -48,8 +51,8 @@ export default function EditProductPage() {
         setName(product.name)
         setDescription(product.description)
         setPrice(product.price)
-        setImageUrl(product.image_url)
-        setImagePreview(product.image_url)
+        setImageUrls(product.image_urls || ['', ''])
+        setImagePreviews(product.image_urls || [null, null])
         setCategory(product.category)
         setStockQuantity(product.stock_quantity)
         setIsFeatured(product.is_featured)
@@ -66,11 +69,19 @@ export default function EditProductPage() {
     loadProduct()
   }, [id, navigate])
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0]
-      setImageFile(file)
-      setImagePreview(URL.createObjectURL(file))
+      const newImageFiles = [...imageFiles]
+      newImageFiles[index] = file
+      setImageFiles(newImageFiles)
+
+      const newImagePreviews = [...imagePreviews]
+      newImagePreviews[index] = URL.createObjectURL(file)
+      setImagePreviews(newImagePreviews)
     }
   }
 
@@ -81,19 +92,23 @@ export default function EditProductPage() {
 
     setLoading(true)
     try {
-      let finalImageUrl = imageUrl
-      if (imageFile) {
-        toast.loading('Subiendo imagen...')
-        finalImageUrl = await uploadProductImage(imageFile)
-        toast.dismiss()
-      }
+      toast.loading('Subiendo imágenes...')
+      const finalImageUrls = await Promise.all(
+        imageFiles.map(async (file, index) => {
+          if (file) {
+            return await uploadProductImage(file)
+          }
+          return imageUrls[index]
+        }),
+      )
+      toast.dismiss()
 
       toast.loading('Actualizando producto...')
       await updateProduct(id, {
         name,
         description,
         price,
-        image_url: finalImageUrl,
+        image_urls: finalImageUrls,
         category,
         stock_quantity: stockQuantity,
         is_featured: isFeatured,
@@ -189,18 +204,41 @@ export default function EditProductPage() {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">
-                Imagen del Producto
+                Imagen del Producto 1
               </label>
               <input
                 type="file"
-                onChange={handleImageChange}
+                onChange={(e) => handleImageChange(e, 0)}
                 className="w-full mt-1"
                 accept="image/*"
               />
-              {imagePreview && (
+              {imagePreviews[0] && (
                 <div className="mt-2">
                   <img
-                    src={imagePreview}
+                    src={imagePreviews[0]}
+                    alt="Preview"
+                    className="h-32 w-32 object-cover rounded-md"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none'
+                    }}
+                  />
+                </div>
+              )}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Imagen del Producto 2
+              </label>
+              <input
+                type="file"
+                onChange={(e) => handleImageChange(e, 1)}
+                className="w-full mt-1"
+                accept="image/*"
+              />
+              {imagePreviews[1] && (
+                <div className="mt-2">
+                  <img
+                    src={imagePreviews[1]}
                     alt="Preview"
                     className="h-32 w-32 object-cover rounded-md"
                     onError={(e) => {

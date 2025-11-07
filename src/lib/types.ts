@@ -3,7 +3,7 @@ export interface Product {
   name: string
   description: string
   price: number
-  image_url: string
+  image_urls: string[]
   category: string
   is_featured: boolean
   is_new: boolean

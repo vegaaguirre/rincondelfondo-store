@@ -8,8 +8,11 @@ export default function AddProductPage() {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState(0)
-  const [imageFile, setImageFile] = useState<File | null>(null)
-  const [imagePreview, setImagePreview] = useState<string | null>(null)
+  const [imageFiles, setImageFiles] = useState<(File | null)[]>([null, null])
+  const [imagePreviews, setImagePreviews] = useState<(string | null)[]>([
+    null,
+    null,
+  ])
   const [category, setCategory] = useState('')
   const [stockQuantity, setStockQuantity] = useState(0)
   const [isFeatured, setIsFeatured] = useState(false)
@@ -18,25 +21,35 @@ export default function AddProductPage() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0]
-      setImageFile(file)
-      setImagePreview(URL.createObjectURL(file))
+      const newImageFiles = [...imageFiles]
+      newImageFiles[index] = file
+      setImageFiles(newImageFiles)
+
+      const newImagePreviews = [...imagePreviews]
+      newImagePreviews[index] = URL.createObjectURL(file)
+      setImagePreviews(newImagePreviews)
     }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!imageFile) {
-      toast.error('Por favor, selecciona una imagen.')
+    if (imageFiles.some((file) => file === null)) {
+      toast.error('Por favor, selecciona ambas imágenes.')
       return
     }
 
     setLoading(true)
     try {
-      toast.loading('Subiendo imagen...')
-      const imageUrl = await uploadProductImage(imageFile)
+      toast.loading('Subiendo imágenes...')
+      const imageUrls = await Promise.all(
+        imageFiles.map((file) => uploadProductImage(file!)),
+      )
       toast.dismiss()
 
       toast.loading('Añadiendo producto...')
@@ -44,7 +57,7 @@ export default function AddProductPage() {
         name,
         description,
         price,
-        image_url: imageUrl,
+        image_urls: imageUrls,
         category,
         stock_quantity: stockQuantity,
         is_featured: isFeatured,
@@ -123,19 +136,38 @@ export default function AddProductPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Imagen del Producto
+              Imagen del Producto 1
             </label>
             <input
               type="file"
-              onChange={handleImageChange}
+              onChange={(e) => handleImageChange(e, 0)}
               className="w-full mt-1"
               accept="image/*"
               required
             />
-            {imagePreview && (
+            {imagePreviews[0] && (
               <img
-                src={imagePreview}
-                alt="Vista previa"
+                src={imagePreviews[0]}
+                alt="Vista previa 1"
+                className="mt-4 w-32 h-32 object-cover"
+              />
+            )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Imagen del Producto 2
+            </label>
+            <input
+              type="file"
+              onChange={(e) => handleImageChange(e, 1)}
+              className="w-full mt-1"
+              accept="image/*"
+              required
+            />
+            {imagePreviews[1] && (
+              <img
+                src={imagePreviews[1]}
+                alt="Vista previa 2"
                 className="mt-4 w-32 h-32 object-cover"
               />
             )}

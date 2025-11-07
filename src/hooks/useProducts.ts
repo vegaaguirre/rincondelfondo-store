@@ -17,7 +17,11 @@ export function useProducts() {
         .order('created_at', { ascending: false })
 
       if (error) throw error
-      setProducts(data || [])
+      const transformedProducts = data.map((p: any) => ({
+        ...p,
+        image_urls: p.image_urls || [p.image_url, ''],
+      }))
+      setProducts(transformedProducts || [])
     } catch (err: any) {
       setError(err.message)
     } finally {
