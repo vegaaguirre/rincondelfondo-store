@@ -13,7 +13,7 @@ export default function AboutSection() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Nuestra <span className="bg-gradient-to-r from-pink-600 to-rose-500 bg-clip-text text-transparent">Historia</span>
+            Nuestra Historia: Pasión por las <span className="bg-gradient-to-r from-pink-600 to-rose-500 bg-clip-text text-transparent">Flores Artesanales</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Conoce la pasión y dedicación detrás de cada creación artesanal
