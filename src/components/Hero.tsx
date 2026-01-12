@@ -132,7 +132,7 @@ export default function Hero() {
         className="absolute right-0 top-1/2 transform -translate-y-1/2 hidden lg:block"
       >
         <img
-          src="public/RicondelFondo.png"
+          src="/RicondelFondo.png"
           alt="Flores artesanales de fomi"
           className="w-96 h-96 object-cover rounded-full shadow-2xl border-8 border-white/50"
         />
