@@ -19,7 +19,9 @@ export function useProducts() {
       if (error) throw error
       const transformedProducts = data.map((p: any) => ({
         ...p,
-        image_urls: p.image_urls || [p.image_url, ''],
+        image_urls: Array.isArray(p.image_urls) && p.image_urls.length > 0
+          ? p.image_urls
+          : [],
       }))
       setProducts(transformedProducts || [])
     } catch (err: any) {
