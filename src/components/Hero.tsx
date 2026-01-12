@@ -132,7 +132,7 @@ export default function Hero() {
         className="absolute right-0 top-1/2 transform -translate-y-1/2 hidden lg:block"
       >
         <img
-          src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+          src="public/RicondelFondo.png"
           alt="Flores artesanales de fomi"
           className="w-96 h-96 object-cover rounded-full shadow-2xl border-8 border-white/50"
         />

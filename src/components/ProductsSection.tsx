@@ -1,9 +1,13 @@
 import { motion } from 'framer-motion'
 import { Star, Plus, ShoppingCart, Tag } from 'lucide-react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination, Navigation } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 import { useProducts } from '@/hooks/useProducts'
 import { useCart } from '@/hooks/useCart'
 import { Product } from '@/lib/types'
-import toast from 'react-hot-toast'
 
 interface ProductCardProps {
   product: Product
@@ -16,9 +20,9 @@ function ProductCard({ product }: ProductCardProps) {
     addItem({
       product_id: product.id,
       product_name: product.name,
-      product_image_url: product.image_url,
+      product_image_url: product.image_urls[0],
       price: product.price,
-      quantity: 1
+      quantity: 1,
     })
   }
 
@@ -31,14 +35,25 @@ function ProductCard({ product }: ProductCardProps) {
       className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
     >
       <div className="relative overflow-hidden">
-        <img
-          src={product.image_url}
-          alt={product.name}
-          className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-        />
-        
-        {/* Product Tags */}
-        <div className="absolute top-4 left-4 space-y-2">
+        <Swiper
+          modules={[Pagination, Navigation]}
+          spaceBetween={0}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          navigation
+          className="w-full h-64"
+        >
+          {(product.image_urls || []).map((url, index) => (
+            <SwiperSlide key={index}>
+              <img
+                src={url || ''}
+                alt={`${product.name} - Imagen ${index + 1}`}
+                className="w-full h-full object-cover"
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <div className="absolute top-4 left-4 space-y-2 z-10">
           {product.is_new && (
             <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-medium flex items-center space-x-1">
               <Tag className="h-3 w-3" />
